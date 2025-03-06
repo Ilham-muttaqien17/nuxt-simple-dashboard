@@ -1,5 +1,10 @@
 # Simple Dashboard Web
 
+### Note
+```
+Every api endpoint has been managed by Nitro server before hit to the actual Backend server, so client only hit the Nitro server api route
+```
+
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup

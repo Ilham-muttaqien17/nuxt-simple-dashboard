@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import type { UserSessionData } from './types/session';
+
 let reload = 0;
 
 export default defineNuxtConfig({
@@ -31,7 +33,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: false },
-  modules: ['@nuxt/ui', '@nuxt/eslint'],
+  modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxt/fonts'],
   telemetry: false,
   typescript: {
     strict: true,
@@ -45,3 +47,9 @@ export default defineNuxtConfig({
   },
   vite: { clearScreen: false }
 });
+
+declare module 'h3' {
+  interface H3EventContext {
+    session: UserSessionData | null;
+  }
+}
