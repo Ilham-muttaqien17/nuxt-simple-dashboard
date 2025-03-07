@@ -1,7 +1,4 @@
-import type { H3Event } from 'h3';
-import { useUserSession } from '~/server/utils/session';
-
-async function logout(event: H3Event) {
+export default defineEventHandler(async (event) => {
   try {
     // Clear session
     const session = await useUserSession(event);
@@ -13,6 +10,4 @@ async function logout(event: H3Event) {
   } catch (err: any) {
     throw createError(err);
   }
-}
-
-export default logout;
+});

@@ -88,6 +88,7 @@ export function useRequestError(err: any, formRef?: Ref) {
 
     if (typeof msg === 'string') {
       toast.add({ title: msg, color: 'danger' });
+      return;
     }
   }
 

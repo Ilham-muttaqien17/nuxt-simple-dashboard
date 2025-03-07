@@ -1,10 +1,6 @@
-import type { H3Event } from 'h3';
 import { LoginForm, type TLoginForm } from '~/scheme/login';
-import { doRequest } from '~/server/utils/request';
-import { useUserSession } from '~/server/utils/session';
-import { useValidator } from '~/server/utils/validator';
 
-async function login(event: H3Event) {
+export default defineEventHandler(async (event) => {
   try {
     const parsedBody = await useValidator<TLoginForm>({
       event,
@@ -40,6 +36,4 @@ async function login(event: H3Event) {
   } catch (err: any) {
     throw createError(err);
   }
-}
-
-export default login;
+});

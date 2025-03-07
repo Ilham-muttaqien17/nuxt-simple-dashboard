@@ -1,4 +1,4 @@
-import type { RawAxiosRequestHeaders } from 'axios';
+import type { AxiosError, RawAxiosRequestHeaders } from 'axios';
 import axios from 'axios';
 import type { H3Event, HTTPMethod } from 'h3';
 import { createUrlParams } from './helpers';
@@ -15,6 +15,7 @@ interface RequestOptions {
   timeout?: number;
   isRawData?: boolean;
   isUrlEncoded?: boolean;
+  isFormData?: boolean;
 }
 
 const getAuthorization = (event: H3Event) => {
@@ -27,18 +28,49 @@ const getAuthorization = (event: H3Event) => {
   return session.token ? `Bearer ${session.token.accessToken.value}` : '';
 };
 
-const getHeaders = ({ event, isUrlEncoded }: RequestOptions) => {
+const getHeaders = ({ event, isUrlEncoded, isFormData }: RequestOptions) => {
   const auth = getAuthorization(event);
 
   const headers = {
     ...(auth && { Authorization: auth }),
     'User-Agent': event.node.req.headers['user-agent'] ? event.node.req.headers['user-agent'] : 'FE',
     'Cache-Control': 'no-cache',
-    'Content-Type': !isUrlEncoded ? 'application/json' : 'application/x-www-form-urlencoded'
+    'Content-Type': isFormData ? 'multipart/form-data' : !isUrlEncoded ? 'application/json' : 'application/x-www-form-urlencoded'
   };
 
   return headers;
 };
+
+function buildError(err: AxiosError<any>) {
+  if (err.code === 'ECONNREFUSED') {
+    return createError({
+      statusCode: 500,
+      statusMessage: 'Unable to connect server',
+      stack: undefined,
+      fatal: false
+    });
+  }
+
+  if (err.code === 'ETIMEDOUT') {
+    return createError({
+      statusCode: 500,
+      statusMessage: 'Request Timeout',
+      stack: undefined,
+      fatal: false
+    });
+  }
+
+  const response = err.response ? err.response : null;
+  const data = response ? response.data : null;
+  const message = data ? data.message : 'Ups, something went wrong!';
+
+  return createError({
+    statusCode: response?.status ?? 500,
+    statusMessage: message,
+    stack: undefined,
+    fatal: false
+  });
+}
 
 /**
  * Create HTTP Request
@@ -81,6 +113,6 @@ export async function doRequest<T = any>(opts: RequestOptions): Promise<T> {
 
     return (opts.isRawData ? result : result.data) as T;
   } catch (error: any) {
-    throw isError(error) ? error : createError(error);
+    throw isError(error) ? error : buildError(error);
   }
 }

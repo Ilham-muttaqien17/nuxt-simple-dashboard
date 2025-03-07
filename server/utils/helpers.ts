@@ -23,3 +23,13 @@ export function createUrlParams(data: Record<string, any>): string {
 
   return mapped.filter((v) => v.split('=')[1] !== '').join('&');
 }
+
+/**
+ * Convert to Array
+ * @param val
+ * @param assign - true/false, default: `false`
+ * @returns Array of `T` type
+ */
+export const toArray = <T = any>(val: any, assign = false) => {
+  return (Array.isArray(val) ? val : assign ? [val] : []) as T[];
+};
