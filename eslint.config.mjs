@@ -8,7 +8,8 @@ export default withNuxt(
       '@typescript-eslint/no-explicit-any': 'off',
       'vue/comma-dangle': ['error', 'never'],
       '@typescript-eslint/no-unused-vars': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error'
+      '@typescript-eslint/consistent-type-imports': 'error',
+      'vue/multi-word-component-names': 'off'
     }
   }
 );

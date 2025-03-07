@@ -9,12 +9,12 @@
       <span class="text-gray-500 text-xs sm:text-sm mt-4 text-center">Please enter your email and password to continue</span>
       <div class="flex flex-col gap-6 mt-12">
         <FormField label="Email" field-error="email">
-          <UInput v-model="form.data.email" placeholder="Enter your email" size="lg" />
+          <UInput v-model="form.data.email" placeholder="Enter your email" size="lg" color="success" />
         </FormField>
         <FormField label="Password" field-error="password">
-          <UInput v-model="form.data.password" type="password" placeholder="***********" size="lg" />
+          <UInput v-model="form.data.password" type="password" placeholder="***********" size="lg" color="success" />
         </FormField>
-        <UButton block type="submit" size="lg" :loading="form.loading">Sign In</UButton>
+        <UButton block type="submit" size="lg" color="success" :loading="form.loading">Sign In</UButton>
       </div>
     </FormRoot>
   </div>
