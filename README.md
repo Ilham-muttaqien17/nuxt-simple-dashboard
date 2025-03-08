@@ -9,21 +9,28 @@ Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduct
 
 ## Setup
 
-Make sure to install dependencies:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Ilham-muttaqien17/nuxt-simple-dasboard
+   cd nuxt-simple-dasboard
+   ```
+2. **Install dependencies**:
+    ```bash
+    # npm
+    npm install
 
-```bash
-# npm
-npm install
+    # pnpm
+    pnpm install
 
-# pnpm
-pnpm install
+    # yarn
+    yarn install
 
-# yarn
-yarn install
+    # bun
+    bun install
+    ```
+3. **Environment Configuration**:
 
-# bun
-bun install
-```
+    Copy the `config/.env.example` file to `config/.env` to configure your environment variables.
 
 ## Development Server
 
