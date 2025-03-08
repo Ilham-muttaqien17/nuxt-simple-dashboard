@@ -1,7 +1,7 @@
 <template>
   <aside
-    class="h-full w-72 bg-white text-sm px-4 py-6 overflow-y-scroll scroll-mini transition-all duration-300 ease-in-out z-40 select-none shadow-md"
-    :class="[modelValue ? 'ml-0' : '-ml-72']"
+    class="h-full w-72 fixed flex-shrink-0 bg-white text-sm px-4 py-6 overflow-y-scroll scroll-mini transition-all duration-300 ease-in-out z-40 select-none shadow-md"
+    :class="[modelValue ? 'left-0' : '-left-72']"
   >
     <div class="relative flex flex-col justify-between w-full h-full">
       <div class="relative flex flex-col gap-1 w-full">

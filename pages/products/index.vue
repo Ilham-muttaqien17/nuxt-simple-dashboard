@@ -16,7 +16,7 @@
           />
         </div>
         <div class="flex flex-wrap sm:flex-nowrap items-end gap-4">
-          <FormField label="Category">
+          <FormField label="Category" class="grow">
             <USelect
               v-model="filter.categoryId"
               :options="categories"
