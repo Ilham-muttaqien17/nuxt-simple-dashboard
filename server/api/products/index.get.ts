@@ -6,7 +6,14 @@ export default defineEventHandler(async (event) => {
     const rawResponse = await doRequest({
       method: 'GET',
       url: '/api/v1/products',
-      event
+      event,
+      query: {
+        title: q.title,
+        price: q.price,
+        price_min: q.price_min,
+        price_max: q.price_max,
+        categoryId: q.categoryId
+      }
     });
 
     const rawResult = toArray(rawResponse);
@@ -30,7 +37,8 @@ export default defineEventHandler(async (event) => {
       description: item.description,
       images: item.images,
       creationAt: item.creationAt,
-      updatedAt: item.updatedAt
+      updatedAt: item.updatedAt,
+      category: item.category
     }));
 
     return {

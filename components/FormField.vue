@@ -1,6 +1,6 @@
 <template>
   <div class="relative block space-y-1">
-    <div v-if="props.label" class="tx-caption-1 font-medium text-gray-800 flex items-center gap-1">
+    <div v-if="props.label" class="text-sm font-medium text-gray-800 flex items-center gap-1">
       {{ props.label }}
     </div>
     <div class="relative">

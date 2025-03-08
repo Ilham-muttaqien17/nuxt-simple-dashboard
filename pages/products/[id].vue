@@ -48,8 +48,8 @@
           </FormField>
         </div>
         <div class="flex items-center gap-4 mt-6 ml-auto">
-          <UButton size="lg" color="gray" @click="router.push('/products')">Cancel</UButton>
-          <UButton size="lg" color="success" type="submit">Save Product</UButton>
+          <UButton icon="heroicons:x-mark" size="lg" color="gray" @click="router.push('/products')">Cancel</UButton>
+          <UButton icon="heroicons:document-text" size="lg" color="success" type="submit">Save Product</UButton>
         </div>
       </FormRoot>
     </CardContainer>
@@ -71,6 +71,8 @@
 </template>
 <script setup lang="ts">
 import type { TCreateProduct } from '~/scheme/product';
+import type { Category } from '~/types/category';
+import type { Product } from '~/types/product';
 import type { DataTableResponse } from '~/types/ui/table';
 
 definePageMeta({
@@ -89,23 +91,6 @@ const isUpdate = computed(() => detailId.value !== 'add');
 useHead({
   title: `${!isUpdate.value ? 'Create' : 'Update'} Product`
 });
-
-type Product = {
-  id: number;
-  title: string;
-  slug: string;
-  price: number;
-  images: string[];
-  description: string;
-  creationAt: string;
-  updatedAt: string;
-  category: Record<string, any>;
-};
-
-type Category = {
-  id: number;
-  name: string;
-};
 
 const formRef = ref();
 const files = ref();
