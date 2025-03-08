@@ -46,7 +46,8 @@ const onSubmit = async () => {
   try {
     formRef.value.clearError();
     form.value.loading = true;
-    await useTimeout(250);
+
+    await useTimeout(350);
     await useRequest('/auth/login', {
       method: 'POST',
       body: { ...form.value.data },

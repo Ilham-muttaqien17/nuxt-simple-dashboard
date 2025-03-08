@@ -2,7 +2,7 @@
 
 ### Note
 ```
-Every api endpoint has been managed by Nitro server before hit to the actual Backend server, so client only hit the Nitro server api route
+Every api endpoint of the `Platzi Fake Store API` is managed by Nitro server before hit to the actual Backend server. So please check this.
 ```
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

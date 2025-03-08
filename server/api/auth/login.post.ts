@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from '~/constants';
 import { LoginForm, type TLoginForm } from '~/scheme/login';
 
 export default defineEventHandler(async (event) => {
@@ -18,16 +19,17 @@ export default defineEventHandler(async (event) => {
     const token = {
       accessToken: {
         value: response.refresh_token,
-        exp: 60 * 60 * 10 // Set exp for 10 Hours
+        exp: ACCESS_TOKEN_EXPIRY
       },
       refreshToken: {
         value: response.access_token,
-        exp: 60 * 60 * 24 * 20 // Set exp for 20 Days
+        exp: REFRESH_TOKEN_EXPIRY
       }
     };
 
     // Set session
-    const session = await useUserSession(event, 60 * 60 * 24 * 20);
+    const session = await useUserSession(event, ACCESS_TOKEN_EXPIRY);
+    await session.clear();
     await session.update({ token });
 
     return {

@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import type { H3Event } from 'h3';
+import { ACCESS_TOKEN_EXPIRY } from '~/constants';
 import type { UserSessionConfig, UserSessionData } from '~/types/session';
-
-const exp = 60 * 60 * 10; // 10 Hours
 
 const userSessionConfig: UserSessionConfig = {
   name: 'user_session',
@@ -12,12 +11,12 @@ const userSessionConfig: UserSessionConfig = {
     secure: false,
     path: '/'
   },
-  maxAge: exp,
+  maxAge: ACCESS_TOKEN_EXPIRY,
   sessionHeader: false,
   password: 'gdum9$98y*G8KXfb#YNBM1@uuWIjof+Azq123faa'
 };
 
-export async function useUserSession(event: H3Event, expiry: number = exp) {
+export async function useUserSession(event: H3Event, expiry: number = ACCESS_TOKEN_EXPIRY) {
   const session = await useSession<UserSessionData>(event, {
     ...userSessionConfig,
     maxAge: expiry
